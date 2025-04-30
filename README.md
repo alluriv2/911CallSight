@@ -171,12 +171,6 @@ This will pull the Mistral model and start serving it locally.
     - Append the structured information to the corresponding transcript.
     - Insert the final complete data in `all_transcripts.json` into the configured database table named `emergency_calls`.
 
-7. Run the transcription and structured information extraction script to:
-
-- Transcribe 911 audio using **Whisper**
-- Extract structured JSON using **Mistral via Ollama**
-- Save all transcripts in a file called `all_transcripts.json`
-
 8. **Run the Flask Server:**
 
    ```bash

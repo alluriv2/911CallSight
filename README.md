@@ -155,9 +155,21 @@ This will pull the Mistral model and start serving it locally.
 
 4. Start PostgreSQL database server and create a database named `911_Call_Data`.
 
-5. Create the `emergency_calls` table using the provided SQL schema.
+5. **Place your audio files** inside the `Audio_Files/` folder  
 
-6. Place audio files into the `Audio_Files/` folder (use `../Audio_Files/` if running from a `Notebooks/` directory).
+6. **Prepare your audio transcript loader:**
+
+   - Open `transcribe_extract_load.py`
+   - Set the correct `folder_path` for your audio files
+   - Set the correct `json_file_path` for the JSON file (usually inside `Audio_Files/`)
+
+7. **Run the transcription pipeline:**
+
+   This script will:
+    - Transcribe each 911 audio file using **Whisper** and save the transcripts along with the date and confidence score to a JSON file named `all_transcripts.json`, stored in the `Audio_Files/` folder.
+    - Extract structured information from each transcript in `all_transcripts.json` using **Mistral** (via Ollama).
+    - Append the structured information to the corresponding transcript.
+    - Insert the final complete data in `all_transcripts.json` into the configured database table named `emergency_calls`.
 
 7. Run the transcription and structured information extraction script to:
 
@@ -165,15 +177,20 @@ This will pull the Mistral model and start serving it locally.
 - Extract structured JSON using **Mistral via Ollama**
 - Save all transcripts in a file called `all_transcripts.json`
 
-8. Insert data into PostgreSQL using the provided database script.
+8. **Run the Flask Server:**
 
-9. Launch the Flask server:
+   ```bash
+   python flask_app_main.py
+   ```
 
-```bash
-python flask_app_main.py
-```
+9. **Call the API using the test client or your browser:**
 
-10. Access the API through your browser, Postman, or a Python script.
+    - Use `DB_API.py` to make sample requests
+    - Example API call:
+
+      ```
+      http://127.0.0.1:5000/getData?key=123&start=2025-04-01&end=2025-04-05
+      ```
 
 ---
 

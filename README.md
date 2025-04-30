@@ -190,10 +190,14 @@ This will pull the Mistral model and start serving it locally.
 
 ## Future Enhancements
 
+- Implement additional API endpoints for filtering by incident type, flags, or file name.
+- Evaluate and fine-tune different LLMs (e.g., GPT-4, Mistral, LLaMA) for higher-quality structured extraction.
+- Support model selection and temperature tuning for more customizable and accurate LLM-based JSON extraction.
+- Implement error logging and monitoring.
+- Extend the database schema and infrastructure to support scalability for millions of call records using normalization, indexing, and partitioning strategies.
+- Deploy the Flask server using Gunicorn and Nginx for production.
 - Implement authentication tokens instead of static keys.
 - Add pagination support to the `/getData` API.
-- Deploy the Flask server using Gunicorn and Nginx for production.
-- Implement error logging and monitoring.
 - Extend the database schema to store call duration and transcription timestamps.
 
 ---
